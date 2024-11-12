@@ -16,7 +16,9 @@ public class NameGenerator{
 
         try{
             generateNames.join();
-        } catch (InterruptedException e){}
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
 
         for (String name : names) {
             System.out.println(name);
@@ -45,7 +47,9 @@ class GenerateNamesThread extends Thread{
 
         try{
             mergeNames.join();
-        } catch (InterruptedException e){}
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 }
 
@@ -106,8 +110,7 @@ class GenLast extends Thread{
 //merges first name arraylist and last name arraylist
 class MergeNamesThread extends Thread{
     Thread thd1 = null, thd2 = null;
-    String first[], last[], names[];
-    Random rand = new Random();
+    String[] first, last, names;
 
     public MergeNamesThread(Thread t1, Thread t2, String[] f, String[] l, String[] n){
         thd1 = t1; thd2 = t2;
@@ -118,7 +121,9 @@ class MergeNamesThread extends Thread{
         try{
             if(thd1 != null) thd1.join();
             if(thd2 != null) thd2.join();
-        }catch (InterruptedException e){}
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
 
         for(int i=0; i<names.length; i++){
             names[i] = first[i] + " " + last[i];
