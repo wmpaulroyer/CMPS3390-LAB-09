@@ -2,9 +2,7 @@ import java.util.Random;
 import java.awt.*;
 import javax.swing.*;
 
-class OilMonitor extends JPanel{
-    public OilMonitor(){}
-
+class OilMonitor{
     public static void main(String[] args){
         JFrame frame = new JFrame("Oil Monitor");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,8 +17,8 @@ class DrawOilPumps extends JPanel{
 
     //constructor sets up 2d array of OilPumps
     public DrawOilPumps(){
+        this.pumps = new OilPump[5][4];
         Random rand = new Random();
-        pumps = new OilPump[5][4];
         int pumpCount = 1;
 
         for(int i=0; i<pumps.length; i++){
@@ -49,16 +47,20 @@ class DrawOilPumps extends JPanel{
     class OilPump implements Runnable{
         String label;
         int x, y;
-        Color c;
+        Color color;
         int value, speed, direction, total;
 
         //OilPump constructor
-        OilPump(String l, int xx, int yy, Color cc, int s){
-            label = l;
-            x = xx; y = yy; c = cc; speed = s;
-            value = 0;
-            direction = 1;
-            total = 0;
+        OilPump(String l, int x, int y, Color c, int s){
+            this.label = l;
+            this.x = x;
+            this.y = y;
+            this.color = c;
+            this.speed = s;
+            this.value = 0;
+            this.direction = 1;
+            this.total = 0;
+
             new Thread(this).start();
         }
 
@@ -66,7 +68,7 @@ class DrawOilPumps extends JPanel{
         public void update(Graphics g){
             Font font = new Font("Arial", Font.BOLD, 12);
             g.setFont(font);
-            g.setColor(c);
+            g.setColor(color);
             int size = value/2;
 
             g.fillOval(x-size,y-size,value,value);

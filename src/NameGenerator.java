@@ -30,10 +30,10 @@ public class NameGenerator{
 class GenerateNamesThread extends Thread{
     String[] first, last, names;
 
-    public GenerateNamesThread(String [] n, int count){
-        first = new String[count];
-        last = new String[count];
-        names = n;
+    public GenerateNamesThread(String [] names, int count){
+        this.first = new String[count];
+        this.last = new String[count];
+        this.names = names;
     }
 
     public void run(){
@@ -58,11 +58,11 @@ class GenFirst extends Thread{
     String[] firstNames;
 
     public GenFirst(String[] f){
-        firstNames = f;
+        this.firstNames = f;
     }
 
     public void run(){
-        ArrayList<String> nameList = new ArrayList<String>();
+        ArrayList<String> nameList = new ArrayList<>();
         Random rand = new Random();
 
         try{
@@ -85,11 +85,11 @@ class GenLast extends Thread{
     String[] lastNames;
 
     public GenLast(String[] l){
-        lastNames = l;
+        this.lastNames = l;
     }
 
     public void run(){
-        ArrayList<String> nameList = new ArrayList<String>();
+        ArrayList<String> nameList = new ArrayList<>();
         Random rand = new Random();
 
         try{
@@ -109,12 +109,15 @@ class GenLast extends Thread{
 
 //merges first name arraylist and last name arraylist
 class MergeNamesThread extends Thread{
-    Thread thd1 = null, thd2 = null;
+    Thread thd1, thd2;
     String[] first, last, names;
 
     public MergeNamesThread(Thread t1, Thread t2, String[] f, String[] l, String[] n){
-        thd1 = t1; thd2 = t2;
-        first = f; last = l; names = n;
+        this.thd1 = t1;
+        this.thd2 = t2;
+        this.first = f;
+        this.last = l;
+        this.names = n;
     }
 
     public void run(){

@@ -2,9 +2,7 @@ import java.util.Random;
 import java.awt.*;
 import javax.swing.*;
 
-public class StockTicker extends JPanel{
-    public StockTicker(){}
-
+public class StockTicker{
     public static void main(String[] args){
         JFrame frame = new JFrame("Stock Ticker");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,9 +18,10 @@ class DrawBars extends JPanel{
     int count = 50;
 
     public DrawBars(){
-        stocks = new Stock[count];
+        this.stocks = new Stock[count];
+
         for(int i=0; i<count; i++){
-            stocks[i] = new Stock();
+            this.stocks[i] = new Stock();
         }
     }
 
@@ -67,20 +66,21 @@ class Stock{
     //Constructor
     public Stock(){
         int length = rand.nextInt(3)+2;
+
         for(int i=0; i<length; i++){
-            name += (char)(rand.nextInt(26) + 'A');
+            this.name += (char)(rand.nextInt(26) + 'A');
         }
 
-        rColor = rand.nextInt(200);
-        gColor = rand.nextInt(200);
-        bColor = rand.nextInt(200);
+        this.rColor = rand.nextInt(200);
+        this.gColor = rand.nextInt(200);
+        this.bColor = rand.nextInt(200);
 
-        value = rand.nextInt(290) + 10;
+        this.value = rand.nextInt(290) + 10;
     }
 
     //Updates the Stock value
     public void updateValue(){
-        value += rand.nextInt(11) - 5;
+        value += rand.nextInt(21) - 10;
         if(value < 0) value = 0;
     }
 }
